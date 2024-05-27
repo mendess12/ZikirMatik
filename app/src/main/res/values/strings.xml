@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ZikirMatik</string>
+    <string name="hadith">Hadis ve Ayet</string>
+    <string name="hadith_title">Kuran-ı Kerim</string>
+    <string name="hadith_content">"Kim zerre kadar hayır işlerse, onu görecek ve kim zerre kadar kötülük işlerse, onu görecek."</string>
 </resources>

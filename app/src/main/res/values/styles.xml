@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="head" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="count_title" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/padding_8dp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="day" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="hadith_content" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="hadith_title" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_10sp</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="arabic_name" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_24sp</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="turkish_name" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+    <style name="city" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:padding">@dimen/padding_4dp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+</resources>

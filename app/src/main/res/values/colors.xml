@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="screen_background">#B7B788</color>
+    <color name="home_item_background">#A5A57A</color>
+    <color name="icon_color">#757556</color>
+    <color name="text_color">#F3F0EE</color>
 </resources>

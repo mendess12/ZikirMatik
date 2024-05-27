@@ -6,4 +6,6 @@
     <string name="turkish_name">Allah</string>
     <string name="arabic_name">الله</string>
     <string name="mean">"Eşi benzeri olmayan"</string>
+    <string name="list_title">"Fatiha zikirlerim"</string>
+    <string name="list_count">"1000"</string>
 </resources>

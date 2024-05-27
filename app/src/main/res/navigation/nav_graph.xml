@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/hadithFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.hadith.HadithFragment"
+        android:label="fragment_hadith"
+        tools:layout="@layout/fragment_hadith" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.list.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/nameOfAllahFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.nameofAllah.NameOfAllahFragment"
+        android:label="fragment_name_of_allah"
+        tools:layout="@layout/fragment_name_of_allah" />
+</navigation>

@@ -8,4 +8,8 @@
     <string name="mean">"Eşi benzeri olmayan"</string>
     <string name="list_title">"Fatiha zikirlerim"</string>
     <string name="list_count">"1000"</string>
+    <string name="home">"Ana Sayfa"</string>
+    <string name="list">"Zikirlerim"</string>
+    <string name="name_of_allah">"Esmaül Hüsna"</string>
+
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Margin -->
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_32dp">32dp</dimen>
+    <dimen name="margin_128dp">128dp</dimen>
+
+    <!-- Text Size -->
+    <dimen name="text_size_16sp">16sp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_8dp">8dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="corner_radius_100dp">100dp</dimen>
+
+    <!-- width -->
+    <dimen name="width_28dp">28dp</dimen>
+    <dimen name="width_56dp">56dp</dimen>
+    <dimen name="width_180dp">180dp</dimen>
+
+    <!-- height -->
+    <dimen name="height_28dp">28dp</dimen>
+    <dimen name="height_56dp">56dp</dimen>
+    <dimen name="height_180dp">180dp</dimen>
+</resources>

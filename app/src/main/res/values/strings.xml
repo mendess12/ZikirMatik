@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ZikirMatik</string>
+    <string name="counter_info">100</string>
+    <string name="save">Zikirini Kaydet</string>
+</resources>

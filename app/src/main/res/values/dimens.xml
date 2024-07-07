@@ -14,6 +14,7 @@
     <dimen name="padding_8dp">8dp</dimen>
 
     <!-- Corner Radius -->
+    <dimen name="corner_radius_8dp">8dp</dimen>
     <dimen name="corner_radius_100dp">100dp</dimen>
 
     <!-- width -->

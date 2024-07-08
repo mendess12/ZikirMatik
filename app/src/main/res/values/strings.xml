@@ -10,4 +10,6 @@
     <string name="hadith">Hadis ve Ayetler</string>
     <string name="name_of_allah">Esmaül Husna</string>
     <string name="home">Ana sayfa</string>
+    <string name="et_counter_name">zikir adınız</string>
+    <string name="zikir_kaydet">Zikir Kaydet</string>
 </resources>

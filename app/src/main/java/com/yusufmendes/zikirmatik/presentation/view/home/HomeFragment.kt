@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.BottomSheetDialogBinding
 import com.yusufmendes.zikirmatik.databinding.FragmentHomeBinding
+import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -31,12 +32,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         bottomSheetDialogBinding.btdSave.setOnClickListener() {
             val counterName = bottomSheetDialogBinding.etCounterName.text.toString()
             if (counterName.isEmpty()) {
-                Snackbar.make(requireView(), "Lütfen bir isim giriniz", Snackbar.LENGTH_SHORT)
-                    .show()
+                view?.showSnackbar("Lütfen bir isim giriniz")
             } else {
-                Snackbar.make(requireView(), "$counterName kaydedildi", Snackbar.LENGTH_SHORT)
-                    .show()
-                dialog.dismiss()
+                view?.showSnackbar("$counterName kaydedildi")
             }
         }
     }

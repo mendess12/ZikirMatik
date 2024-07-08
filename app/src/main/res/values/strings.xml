@@ -14,4 +14,7 @@
     <string name="zikir_kaydet">Zikir Kaydet</string>
     <string name="hadith_title">Kuran-ı Kerim</string>
     <string name="hadith_content">"Kim zerre kadar hayır işlerse, onu görecek ve kim zerre kadar kötülük işlerse, onu görecek."</string>
+    <string name="turkish_name">Allah</string>
+    <string name="arabic_name">الله</string>
+    <string name="mean">"Eşi benzeri olmayan"</string>
 </resources>

@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.FragmentNameOfAllahBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NameOfAllahFragment : Fragment(R.layout.fragment_name_of_allah) {
 
     private lateinit var binding: FragmentNameOfAllahBinding

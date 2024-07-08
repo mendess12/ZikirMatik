@@ -9,7 +9,9 @@ import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.BottomSheetDialogBinding
 import com.yusufmendes.zikirmatik.databinding.FragmentHomeBinding
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding

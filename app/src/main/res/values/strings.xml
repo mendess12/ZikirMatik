@@ -6,4 +6,7 @@
     <string name="counter_name">SubhanAllah</string>
     <string name="counter">150</string>
     <string name="counter_date">01.11.2023</string>
+    <string name="hadith">Hadis ve Ayetler</string>
+    <string name="name_of_allah">Esmaül Husna</string>
+    <string name="home">Ana sayfa</string>
 </resources>

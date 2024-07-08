@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ZikirMatik</string>
     <string name="counter_info">100</string>
-    <string name="save">Zikirini Kaydet</string>
+    <string name="save">Kaydet</string>
+    <string name="zikirlerim">Zikirlerim</string>">
     <string name="search">Arama...</string>
     <string name="counter_name">SubhanAllah</string>
     <string name="counter">150</string>

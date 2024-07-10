@@ -30,11 +30,11 @@ class HadithFragment : Fragment(R.layout.fragment_hadith) {
         }
 
         viewModel.getHadithList()
-        observeData()
+        observeLiveData()
     }
 
 
-    private fun observeData() {
+    private fun observeLiveData() {
         viewModel.hadithLiveData.observe(viewLifecycleOwner) {
             if (it != null) {
                 hadithAdapter.updateHadithList(it)

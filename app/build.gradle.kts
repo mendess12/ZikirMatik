@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
     id("kotlin-kapt")
-    id ("androidx.navigation.safeargs.kotlin")
+    id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
@@ -22,7 +22,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    viewBinding{
+    viewBinding {
         enable = true
     }
 
@@ -61,8 +61,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //navigation component
-    implementation (libs.androidx.navigation.fragment.ktx)
-    implementation (libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //firebase
     implementation(platform(libs.firebase.bom))
@@ -73,7 +73,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     //firebase firestore
-    implementation (libs.firebase.firestore.ktx)
+    implementation(libs.firebase.firestore.ktx)
 
     //mvvm
     implementation(libs.androidx.lifecycle.extensions)
@@ -84,5 +84,10 @@ dependencies {
     ksp(libs.dagger.compiler)
     ksp(libs.hilt.compiler)
     annotationProcessor(libs.dagger.android.processor)
+
+    //room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
 }

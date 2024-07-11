@@ -1,7 +1,12 @@
 package com.yusufmendes.zikirmatik.presentation.view.home
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -40,6 +45,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             buttonCounter.setOnClickListener {
                 viewModel.getCounter()
                 SharedPrefManager(requireContext()).saveCounter(viewModel.count)
+                vibratePhone()
             }
             buttonReset.setOnClickListener {
                 viewModel.resetCounter()
@@ -64,6 +70,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.deleteCounterLiveData.observe(viewLifecycleOwner) {
             binding.txCounterInfo.text = it.toString()
+        }
+    }
+
+    private fun vibratePhone() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // For API level 31 and above
+            val vibratorManager =
+                requireContext().getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            val vibrator = vibratorManager.defaultVibrator
+            vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            // For below API level 31
+            val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // For API level 26 and above
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        300,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                // For below API level 26
+                vibrator.vibrate(300)
+            }
         }
     }
 

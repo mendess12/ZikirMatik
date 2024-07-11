@@ -69,10 +69,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 )
 
                 val counter = binding.txCounterInfo.text.toString().toInt()
-                val id = 3
-                val title = counterName
 
-                val counterEntity = CounterEntity(userId, id, title, counter, date)
+                val counterEntity = CounterEntity(userId, 0, counterName, counter, date)
                 viewModel.addCounter(counterEntity)
                 dialog.dismiss()
             }

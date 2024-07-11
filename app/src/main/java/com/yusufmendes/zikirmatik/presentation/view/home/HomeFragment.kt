@@ -13,6 +13,7 @@ import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.databinding.BottomSheetDialogBinding
 import com.yusufmendes.zikirmatik.databinding.FragmentHomeBinding
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
+import com.yusufmendes.zikirmatik.util.storage.SharedPrefManager
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -29,13 +30,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        binding.buttonSave.setOnClickListener {
-            bottomSheetDialog()
+        with(binding) {
+            buttonSave.setOnClickListener {
+                bottomSheetDialog()
+            }
+            buttonGoList.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_counterListFragment)
+            }
+            buttonCounter.setOnClickListener {
+                viewModel.getCounter()
+                SharedPrefManager(requireContext()).saveCounter(viewModel.count)
+            }
+            buttonReset.setOnClickListener {
+                viewModel.resetCounter()
+                SharedPrefManager(requireContext()).saveCounter(viewModel.count)
+            }
         }
-
-        binding.buttonGoList.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_counterListFragment)
-        }
+        binding.txCounterInfo.text = SharedPrefManager(requireContext()).getCounter().toString()
+        viewModel.count = SharedPrefManager(requireContext()).getCounter()
         observeLiveData()
     }
 
@@ -44,6 +56,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (it != null) {
                 view?.showSnackbar("Zikiriniz Kaydedildi")
             }
+        }
+
+        viewModel.countLiveData.observe(viewLifecycleOwner) {
+            binding.txCounterInfo.text = it.toString()
+        }
+
+        viewModel.deleteCounterLiveData.observe(viewLifecycleOwner) {
+            binding.txCounterInfo.text = it.toString()
         }
     }
 

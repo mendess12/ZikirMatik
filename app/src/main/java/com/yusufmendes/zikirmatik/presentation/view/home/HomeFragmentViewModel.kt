@@ -15,10 +15,22 @@ class HomeFragmentViewModel @Inject constructor(
 ) : ViewModel() {
 
     var addCounterLiveData = MutableLiveData<Unit>()
+    var count = 0
+    val countLiveData = MutableLiveData<Int>()
+    val deleteCounterLiveData = MutableLiveData<Int>()
+
+    fun getCounter() {
+        count++
+        countLiveData.postValue(count)
+    }
+
+    fun resetCounter() {
+        count = 0
+        deleteCounterLiveData.postValue(count)
+    }
 
     fun addCounter(counterEntity: CounterEntity) = viewModelScope.launch {
         val result = addCounterUseCase.addCounter(counterEntity)
         addCounterLiveData.postValue(result)
     }
-
 }

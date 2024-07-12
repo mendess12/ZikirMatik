@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.data.model.NameOfAllah
 import com.yusufmendes.zikirmatik.databinding.ItemNameOfAllahBinding
 
@@ -25,7 +26,8 @@ class NameOfAllahAdapter : RecyclerView.Adapter<NameOfAllahAdapter.NameOfAllahVi
         RecyclerView.ViewHolder(binding.root) {
         fun bind(nameOfAllah: NameOfAllah, colors: Array<String>, position: Int) {
             with(binding) {
-                itemView.setBackgroundColor(Color.parseColor(colors[position % 8]))
+                clItemNameOfAllah.setBackgroundResource(R.drawable.item_background)
+                clItemNameOfAllah.background.setTint(Color.parseColor(colors[position % 8]))
                 tvItemArabicName.text = nameOfAllah.arabicName
                 tvItemTurkishName.text = nameOfAllah.turkishName
                 tvItemMean.text = nameOfAllah.mean

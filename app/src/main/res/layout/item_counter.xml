@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_4dp"
-    android:background="@drawable/item_background">
+    android:background="@drawable/item_background"
+    android:backgroundTint="@color/recycler_item_background">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_counter_name"
@@ -35,11 +36,11 @@
         style="@style/counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_4dp"
         android:layout_marginStart="@dimen/margin_8dp"
+        android:background="@drawable/widgets_background"
         android:gravity="center"
         android:text="@string/counter"
-        android:background="@drawable/widgets_background"
-        android:layout_margin="@dimen/margin_4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.databinding.ItemCounterBinding
 
-class CounterAdapter : RecyclerView.Adapter<CounterAdapter.CounterViewHolder>() {
+class CounterAdapter(
+    private val deleteOnClick: (CounterEntity) -> Unit
+) : RecyclerView.Adapter<CounterAdapter.CounterViewHolder>() {
 
     private val counterList = ArrayList<CounterEntity>()
 
@@ -17,6 +19,9 @@ class CounterAdapter : RecyclerView.Adapter<CounterAdapter.CounterViewHolder>() 
                 tvItemCounterName.text = counter.title
                 tvItemCounterDate.text = counter.date
                 tvItemCounter.text = counter.counter.toString()
+                ivBtnDelete.setOnClickListener {
+                    deleteOnClick(counter)
+                }
             }
         }
 

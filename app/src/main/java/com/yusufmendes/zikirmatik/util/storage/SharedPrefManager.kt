@@ -18,4 +18,13 @@ class SharedPrefManager @Inject constructor(
         editor.putInt("counter", counter)
         editor.apply()
     }
+
+    fun getVibrateState(): Int {
+        return sharedPreferences.getInt("vibrate", 0)
+    }
+
+    fun saveVibrateState(state: Int) {
+        editor.putInt("vibrate", state)
+        editor.apply()
+    }
 }

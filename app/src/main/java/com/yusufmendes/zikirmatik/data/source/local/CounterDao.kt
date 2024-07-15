@@ -19,4 +19,7 @@ interface CounterDao {
     @Delete
     suspend fun deleteCounter(counterEntity: CounterEntity)
 
+    @Query("SELECT * FROM counter_table WHERE title LIKE :title")
+    suspend fun searchCounter(title: String): List<CounterEntity>
+
 }

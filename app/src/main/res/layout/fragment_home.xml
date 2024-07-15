@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_12dp"
         android:background="@color/screen_background"
-        android:src="@drawable/vibration_image"
+        android:src="@drawable/volume_on"
         app:layout_constraintEnd_toStartOf="@+id/button_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

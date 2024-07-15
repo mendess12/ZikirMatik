@@ -9,4 +9,7 @@ class CounterRepositoryImpl @Inject constructor(
     private val counterDao: CounterDao
 ) : CounterRepository {
     override suspend fun getCounterList(): List<CounterEntity> = counterDao.getAllCounters()
+
+    override suspend fun deleteCounter(counterEntity: CounterEntity) =
+        counterDao.deleteCounter(counterEntity)
 }

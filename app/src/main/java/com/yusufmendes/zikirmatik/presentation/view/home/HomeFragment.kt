@@ -30,6 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bottomSheetDialogBinding: BottomSheetDialogBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
+    private var vibrateCount = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,9 +52,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.resetCounter()
                 SharedPrefManager(requireContext()).saveCounter(viewModel.count)
             }
+            buttonVibration.setOnClickListener {
+                vibrateCount = SharedPrefManager(requireContext()).getVibrateState()
+                vibrateCount++
+                SharedPrefManager(requireContext()).saveVibrateState(vibrateCount)
+                vibrateStateBackground()
+            }
         }
         binding.txCounterInfo.text = SharedPrefManager(requireContext()).getCounter().toString()
         viewModel.count = SharedPrefManager(requireContext()).getCounter()
+        vibrateStateBackground()
         observeLiveData()
     }
 
@@ -74,17 +82,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun vibratePhone() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // For API level 31 and above
-            val vibratorManager =
-                requireContext().getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-            val vibrator = vibratorManager.defaultVibrator
-            vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE))
-        } else {
-            // For below API level 31
-            val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                // For API level 26 and above
+        if (SharedPrefManager(requireContext()).getVibrateState() % 2 == 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                // For API level 31 and above
+                val vibratorManager =
+                    requireContext().getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                val vibrator = vibratorManager.defaultVibrator
                 vibrator.vibrate(
                     VibrationEffect.createOneShot(
                         300,
@@ -92,8 +95,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     )
                 )
             } else {
-                // For below API level 26
-                vibrator.vibrate(300)
+                // For below API level 31
+                val vibrator =
+                    requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    // For API level 26 and above
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            300,
+                            VibrationEffect.DEFAULT_AMPLITUDE
+                        )
+                    )
+                } else {
+                    // For below API level 26
+                    vibrator.vibrate(300)
+                }
             }
         }
     }
@@ -125,6 +141,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 viewModel.addCounter(counterEntity)
                 dialog.dismiss()
             }
+        }
+    }
+
+    private fun vibrateStateBackground() {
+        if (SharedPrefManager(requireContext()).getVibrateState() % 2 == 0) {
+            binding.buttonVibration.setImageResource(R.drawable.volume_on)
+        } else {
+            binding.buttonVibration.setImageResource(R.drawable.volume_off)
         }
     }
 }

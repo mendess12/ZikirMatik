@@ -6,5 +6,7 @@ interface CounterRepository {
 
     suspend fun getCounterList(): List<CounterEntity>
 
-    suspend fun  deleteCounter(counterEntity: CounterEntity)
+    suspend fun deleteCounter(counterEntity: CounterEntity)
+
+    suspend fun searchCounter(title: String): List<CounterEntity>
 }

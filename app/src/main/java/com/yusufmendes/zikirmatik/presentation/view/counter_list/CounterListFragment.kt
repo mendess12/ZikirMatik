@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
             rvCounter.adapter = counterAdapter
         }
 
+        search()
         viewModel.getCounterList()
         observeLiveData()
 
@@ -56,6 +58,27 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
                 view?.showSnackbar("Zikir listeniz boş!")
             }
         }
+        viewModel.searchLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                counterAdapter.updateCounterList(it)
+            } else {
+                view?.showSnackbar("Liste boş!")
+            }
+        }
+    }
+
+    private fun search() {
+        binding.searchCounter.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.searchCounter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.searchCounter(newText)
+                return true
+            }
+        })
     }
 
     private fun showAlertDialog(counterEntity: CounterEntity) {

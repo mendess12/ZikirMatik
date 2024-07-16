@@ -10,16 +10,23 @@
         android:id="@+id/homeFragment"
         android:name="com.yusufmendes.zikirmatik.presentation.view.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_counterListFragment"
             app:destination="@id/counterListFragment" />
+        <argument
+            android:name="counter"
+            app:argType="com.yusufmendes.zikirmatik.data.model.CounterEntity" />
     </fragment>
     <fragment
         android:id="@+id/counterListFragment"
         android:name="com.yusufmendes.zikirmatik.presentation.view.counter_list.CounterListFragment"
         android:label="fragment_counter_list"
-        tools:layout="@layout/fragment_counter_list" />
+        tools:layout="@layout/fragment_counter_list">
+        <action
+            android:id="@+id/action_counterListFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hadithFragment"
         android:name="com.yusufmendes.zikirmatik.presentation.view.hadith.HadithFragment"

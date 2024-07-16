@@ -1,9 +1,12 @@
 package com.yusufmendes.zikirmatik.data.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "counter_table")
 data class CounterEntity(
 
@@ -19,4 +22,4 @@ data class CounterEntity(
     @ColumnInfo(name = "date")
     val date: String?
 
-)
+) : Parcelable

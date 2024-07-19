@@ -14,19 +14,12 @@
         <action
             android:id="@+id/action_homeFragment_to_counterListFragment"
             app:destination="@id/counterListFragment" />
-        <argument
-            android:name="counter"
-            app:argType="com.yusufmendes.zikirmatik.data.model.CounterEntity" />
     </fragment>
     <fragment
         android:id="@+id/counterListFragment"
         android:name="com.yusufmendes.zikirmatik.presentation.view.counter_list.CounterListFragment"
         android:label="fragment_counter_list"
-        tools:layout="@layout/fragment_counter_list">
-        <action
-            android:id="@+id/action_counterListFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_counter_list" />
     <fragment
         android:id="@+id/hadithFragment"
         android:name="com.yusufmendes.zikirmatik.presentation.view.hadith.HadithFragment"

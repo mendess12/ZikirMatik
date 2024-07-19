@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
@@ -27,7 +26,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCounterListBinding.bind(view)
 
-        counterAdapter = CounterAdapter(::deleteCounter, ::goToDetail)
+        counterAdapter = CounterAdapter(::deleteCounter)
         with(binding) {
             rvCounter.setHasFixedSize(true)
             rvCounter.layoutManager = LinearLayoutManager(requireContext())
@@ -80,12 +79,6 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
                 return true
             }
         })
-    }
-
-    private fun goToDetail(counterEntity: CounterEntity) {
-        val action =
-            CounterListFragmentDirections.actionCounterListFragmentToHomeFragment(counterEntity)
-        findNavController().navigate(action)
     }
 
     private fun showAlertDialog(counterEntity: CounterEntity) {

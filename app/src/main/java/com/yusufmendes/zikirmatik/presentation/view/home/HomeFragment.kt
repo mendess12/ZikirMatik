@@ -77,7 +77,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         viewModel.deleteCounterLiveData.observe(viewLifecycleOwner) {
-            binding.txCounterInfo.text = it.toString()
+            binding.txCounterInfo.text = SharedPrefManager(requireContext()).getCounter().toString()
         }
     }
 

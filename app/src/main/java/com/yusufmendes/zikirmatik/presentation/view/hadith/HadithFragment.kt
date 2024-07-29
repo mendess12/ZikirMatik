@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.FragmentHadithBinding
 import com.yusufmendes.zikirmatik.presentation.adapter.HadithAdapter
+import com.yusufmendes.zikirmatik.util.extensions.gone
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
+import com.yusufmendes.zikirmatik.util.extensions.visible
+import com.yusufmendes.zikirmatik.util.resources.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,10 +39,20 @@ class HadithFragment : Fragment(R.layout.fragment_hadith) {
 
     private fun observeLiveData() {
         viewModel.hadithLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                hadithAdapter.updateHadithList(it)
-            } else {
-                view?.showSnackbar("Hadis ve Ayet listesi boş!")
+            when (it) {
+                Resource.Loading -> {
+                    binding.pbHadith.visible()
+                }
+
+                is Resource.Success -> {
+                    hadithAdapter.updateHadithList(it.data)
+                    binding.pbHadith.gone()
+                }
+
+                is Resource.Error -> {
+                    view?.showSnackbar(it.errorMessage.toString())
+                    binding.pbHadith.gone()
+                }
             }
         }
     }

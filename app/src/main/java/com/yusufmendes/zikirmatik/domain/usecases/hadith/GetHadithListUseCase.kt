@@ -19,7 +19,7 @@ class GetHadithListUseCase @Inject constructor(
         hadithList.value = if (hadithRepository.getHadithList().isNotEmpty()) {
             Resource.Success(hadithRepository.getHadithList())
         } else {
-            Resource.Error(Throwable("Hadis ve Ayet listesi boş!"))
+            Resource.Error("Hadis ve Ayet listesi boş!")
         }
     }
 }

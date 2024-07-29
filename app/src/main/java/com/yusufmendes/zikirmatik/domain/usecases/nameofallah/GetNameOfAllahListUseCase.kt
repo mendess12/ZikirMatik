@@ -19,7 +19,7 @@ class GetNameOfAllahListUseCase @Inject constructor(
         nameOfAllahList.value = if (nameOfAllahRepository.getNameOfAllahList().isNotEmpty()) {
             Resource.Success(nameOfAllahRepository.getNameOfAllahList())
         } else {
-            Resource.Error(Throwable("Allah'ın isimleri listesi boş!"))
+            Resource.Error("Allah'ın isimleri listesi boş!")
         }
     }
 }

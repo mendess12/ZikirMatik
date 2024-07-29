@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.FragmentNameOfAllahBinding
 import com.yusufmendes.zikirmatik.presentation.adapter.NameOfAllahAdapter
+import com.yusufmendes.zikirmatik.util.extensions.gone
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
+import com.yusufmendes.zikirmatik.util.extensions.visible
+import com.yusufmendes.zikirmatik.util.resources.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,10 +38,20 @@ class NameOfAllahFragment : Fragment(R.layout.fragment_name_of_allah) {
 
     private fun observeLiveData() {
         viewModel.nameOfAllahLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                nameOfAllahAdapter.updateNameOfAllahList(it)
-            } else {
-                view?.showSnackbar("Allah'ın isimleri listesi boşé")
+            when (it) {
+                Resource.Loading -> {
+                    binding.pbNameOfAllah.visible()
+                }
+
+                is Resource.Success -> {
+                    nameOfAllahAdapter.updateNameOfAllahList(it.data)
+                    binding.pbNameOfAllah.gone()
+                }
+
+                is Resource.Error -> {
+                    view?.showSnackbar(it.errorMessage.toString())
+                    binding.pbNameOfAllah.gone()
+                }
             }
         }
     }

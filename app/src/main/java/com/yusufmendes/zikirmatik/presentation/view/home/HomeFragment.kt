@@ -31,6 +31,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var bottomSheetDialogBinding: BottomSheetDialogBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
     private var vibrateCount = 0
+    private lateinit var mContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,22 +51,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
             buttonCounter.setOnClickListener {
                 viewModel.getCounter()
-                SharedPrefManager(requireContext()).saveCounter(viewModel.count)
+                SharedPrefManager(mContext).saveCounter(viewModel.count)
                 vibratePhone()
             }
             buttonReset.setOnClickListener {
                 viewModel.resetCounter()
-                SharedPrefManager(requireContext()).saveCounter(viewModel.count)
+                SharedPrefManager(mContext).saveCounter(viewModel.count)
             }
             buttonVibration.setOnClickListener {
-                vibrateCount = SharedPrefManager(requireContext()).getVibrateState()
+                vibrateCount = SharedPrefManager(mContext).getVibrateState()
                 vibrateCount++
-                SharedPrefManager(requireContext()).saveVibrateState(vibrateCount)
+                SharedPrefManager(mContext).saveVibrateState(vibrateCount)
                 vibrateStateBackground()
             }
         }
-        binding.txCounterInfo.text = SharedPrefManager(requireContext()).getCounter().toString()
-        viewModel.count = SharedPrefManager(requireContext()).getCounter()
+        binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
+        viewModel.count = SharedPrefManager(mContext).getCounter()
         vibrateStateBackground()
         observeLiveData()
     }
@@ -77,16 +83,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         viewModel.deleteCounterLiveData.observe(viewLifecycleOwner) {
-            binding.txCounterInfo.text = SharedPrefManager(requireContext()).getCounter().toString()
+            binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
         }
     }
 
     private fun vibratePhone() {
-        if (SharedPrefManager(requireContext()).getVibrateState() % 2 == 0) {
+        if (SharedPrefManager(mContext).getVibrateState() % 2 == 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 // For API level 31 and above
                 val vibratorManager =
-                    requireContext().getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                    mContext.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
                 val vibrator = vibratorManager.defaultVibrator
                 vibrator.vibrate(
                     VibrationEffect.createOneShot(
@@ -97,7 +103,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             } else {
                 // For below API level 31
                 val vibrator =
-                    requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                    mContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     // For API level 26 and above
                     vibrator.vibrate(
@@ -116,7 +122,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @SuppressLint("HardwareIds")
     private fun bottomSheetDialog() {
-        val dialog = BottomSheetDialog(requireContext())
+        val dialog = BottomSheetDialog(mContext)
         bottomSheetDialogBinding = BottomSheetDialogBinding.inflate(layoutInflater)
         dialog.setContentView(bottomSheetDialogBinding.root)
         dialog.show()
@@ -131,7 +137,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 val date = currentTime
 
                 val userId = Settings.Secure.getString(
-                    requireContext().contentResolver,
+                    mContext.contentResolver,
                     Settings.Secure.ANDROID_ID
                 )
 
@@ -145,7 +151,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun vibrateStateBackground() {
-        if (SharedPrefManager(requireContext()).getVibrateState() % 2 == 0) {
+        if (SharedPrefManager(mContext).getVibrateState() % 2 == 0) {
             binding.buttonVibration.setImageResource(R.drawable.volume_on)
         } else {
             binding.buttonVibration.setImageResource(R.drawable.volume_off)

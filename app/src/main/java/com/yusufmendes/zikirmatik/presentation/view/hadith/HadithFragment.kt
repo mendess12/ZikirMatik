@@ -1,5 +1,6 @@
 package com.yusufmendes.zikirmatik.presentation.view.hadith
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -20,6 +21,12 @@ class HadithFragment : Fragment(R.layout.fragment_hadith) {
     private lateinit var binding: FragmentHadithBinding
     private lateinit var hadithAdapter: HadithAdapter
     private val viewModel: HadithFragmentViewModel by viewModels()
+    private lateinit var mContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +35,7 @@ class HadithFragment : Fragment(R.layout.fragment_hadith) {
         hadithAdapter = HadithAdapter()
         with(binding) {
             rvHadith.setHasFixedSize(true)
-            rvHadith.layoutManager = LinearLayoutManager(requireContext())
+            rvHadith.layoutManager = LinearLayoutManager(mContext)
             rvHadith.adapter = hadithAdapter
         }
 

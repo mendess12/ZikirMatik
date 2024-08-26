@@ -1,5 +1,6 @@
 package com.yusufmendes.zikirmatik.presentation.view.counter_list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -21,6 +22,12 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
     private lateinit var binding: FragmentCounterListBinding
     private val viewModel: CounterListFragmentViewModel by viewModels()
     private lateinit var counterAdapter: CounterAdapter
+    private lateinit var mContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +36,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
         counterAdapter = CounterAdapter(::deleteCounter)
         with(binding) {
             rvCounter.setHasFixedSize(true)
-            rvCounter.layoutManager = LinearLayoutManager(requireContext())
+            rvCounter.layoutManager = LinearLayoutManager(mContext)
             rvCounter.adapter = counterAdapter
         }
 
@@ -84,7 +91,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
     private fun showAlertDialog(counterEntity: CounterEntity) {
 
         val dialogView = layoutInflater.inflate(R.layout.alert_dialog, null)
-        val alertDialog = AlertDialog.Builder(requireContext())
+        val alertDialog = AlertDialog.Builder(mContext)
             .setView(dialogView)
         val dialog = alertDialog.create()
         dialog.setCancelable(false)

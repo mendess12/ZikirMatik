@@ -10,6 +10,8 @@ import android.os.VibratorManager
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -55,8 +57,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 vibratePhone()
             }
             buttonReset.setOnClickListener {
-                viewModel.resetCounter()
-                SharedPrefManager(mContext).saveCounter(viewModel.count)
+                showAlertDialog()
             }
             buttonVibration.setOnClickListener {
                 vibrateCount = SharedPrefManager(mContext).getVibrateState()
@@ -156,6 +157,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } else {
             binding.buttonVibration.setImageResource(R.drawable.volume_off)
         }
+    }
+
+    private fun showAlertDialog() {
+
+        val dialogView = layoutInflater.inflate(R.layout.reset_alert_dialog, null)
+        val alertDialog = AlertDialog.Builder(mContext)
+            .setView(dialogView)
+        val dialog = alertDialog.create()
+        dialog.setCancelable(false)
+
+        dialogView.findViewById<Button>(R.id.rad_btn_cancel).setOnClickListener {
+            dialog.dismiss()
+        }
+        dialogView.findViewById<Button>(R.id.rad_btn_reset).setOnClickListener {
+            viewModel.resetCounter()
+            SharedPrefManager(mContext).saveCounter(viewModel.count)
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 }
 

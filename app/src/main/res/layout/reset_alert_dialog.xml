@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_8dp"
-    android:background="@color/recycler_item_background">
+    android:background="@drawable/alert_dialog_background">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rad_tv_title"

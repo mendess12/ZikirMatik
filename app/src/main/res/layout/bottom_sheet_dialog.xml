@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_8dp"
-    android:background="@color/screen_background">
+    android:background="@drawable/bottom_sheet_dialog_background">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/bsd_tv_info"
         style="@style/counter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_background"
-        android:backgroundTint="@color/recycler_item_background"
+        android:layout_margin="@dimen/margin_8dp"
+        android:backgroundTint="@color/screen_background"
         android:gravity="center"
         android:text="@string/zikir_kaydet"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,8 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_64dp"
-        android:background="@drawable/item_background"
-        android:backgroundTint="@color/recycler_item_background"
+        android:background="@drawable/edit_text_background"
         android:hint="@string/et_counter_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

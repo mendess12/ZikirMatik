@@ -8,7 +8,7 @@ import com.yusufmendes.zikirmatik.R
 fun View.showSnackbar(message: String) {
     val snackbar =
         Snackbar.make(this, message, Snackbar.LENGTH_SHORT)
-    snackbar.setBackgroundTint(resources.getColor(R.color.button_background))
+    snackbar.setBackgroundTint(resources.getColor(R.color.success))
     snackbar.setTextColor(resources.getColor(R.color.text_color))
 
     val view: View = snackbar.view

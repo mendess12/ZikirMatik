@@ -22,11 +22,13 @@
 
     <!-- Corner Radius -->
     <dimen name="corner_radius_8dp">8dp</dimen>
+    <dimen name="corner_radius_24dp">24dp</dimen>
     <dimen name="corner_radius_100dp">100dp</dimen>
     <dimen name="corner_radius_110dp">110dp</dimen>
 
     <!-- width -->
     <dimen name="width_0dp">0dp</dimen>
+    <dimen name="width_2dp">2dp</dimen>
     <dimen name="width_28dp">28dp</dimen>
     <dimen name="width_40dp">40dp</dimen>
     <dimen name="width_56dp">56dp</dimen>

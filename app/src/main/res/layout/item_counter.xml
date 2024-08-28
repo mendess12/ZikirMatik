@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_4dp"
-    android:background="@drawable/item_background"
-    android:backgroundTint="@color/recycler_item_background">
+    android:background="@color/screen_background">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_counter_name"
@@ -27,7 +26,7 @@
         android:layout_marginStart="@dimen/margin_8dp"
         android:gravity="center"
         android:text="@string/counter_date"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_item_counter_name" />
 
@@ -49,10 +48,21 @@
         android:id="@+id/iv_btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_4dp"
         android:backgroundTint="@color/recycler_item_background"
         android:src="@drawable/cancel_image"
-        android:layout_margin="@dimen/margin_4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_4dp"
+        android:layout_marginBottom="@dimen/margin_4dp"
+        android:background="@color/view_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_counter_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

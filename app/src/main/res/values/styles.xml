@@ -11,7 +11,7 @@
     <style name="button" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_16sp</item>
         <item name="android:padding">@dimen/padding_8dp</item>
-        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColor">@color/button_text_color</item>
         <item name="android:fontFamily">@font/inter_regular</item>
     </style>
 

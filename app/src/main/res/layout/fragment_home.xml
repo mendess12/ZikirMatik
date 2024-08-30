@@ -44,11 +44,13 @@
             android:layout_height="@dimen/height_220dp"
             android:backgroundTint="@color/screen_background"
             app:cardCornerRadius="@dimen/corner_radius_110dp"
-            android:background="@drawable/circular_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="@color/stroke_color" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tx_counter_info"

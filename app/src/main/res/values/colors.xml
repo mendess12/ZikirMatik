@@ -8,12 +8,13 @@
     <color name="recycler_item_background">#dcdcff</color>
     <color name="reset_button_color">#dcdcff</color>
     <color name="icon_background">#8b8cff</color>
-    <color name="stroke_color">#838d92</color>
+    <color name="stroke_color">#8B8CFF</color>
     <color name="screen_background">#FFFFFF</color>
     <color name="button_text_color">#FFFFFF</color>
     <color name="text_color">#23233c</color>
     <color name="button_background">#8B8CFF</color>
     <color name="view_color">#23233c</color>
     <color name="success">#6CC57C</color>
+    <color name="purple">#dcdcff</color>
 
 </resources>

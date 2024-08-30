@@ -24,4 +24,8 @@
     <string name="reset">"Sıfırla"</string>
     <string name="reset_title">"Zikirimi Sıfırla"</string>
     <string name="reset_message">"Zikirini sıfırlamak istediğinden emin misin?"</string>
+    <string name="play_store_title">Uygulamalarıma Puan Ver</string>
+    <string name="play_store_message">Play store hesabıma giderek uygulamalarımı puanlamak ister misin?</string>
+    <string name="play_store_cancel">Hayır</string>
+    <string name="play_store_go">Evet</string>
 </resources>

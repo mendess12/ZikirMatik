@@ -65,6 +65,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 SharedPrefManager(mContext).saveVibrateState(vibrateCount)
                 vibrateStateBackground()
             }
+            buttonStar.setOnClickListener {
+                showPlayStoreAlertDialog()
+            }
         }
         binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
         viewModel.count = SharedPrefManager(mContext).getCounter()
@@ -85,6 +88,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.deleteCounterLiveData.observe(viewLifecycleOwner) {
             binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
+        }
+
+        viewModel.playStoreLiveData.observe(viewLifecycleOwner){
+            view?.showSnackbar("İşleminiz başarılı, Play store açılıyor.")
         }
     }
 
@@ -173,6 +180,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         dialogView.findViewById<Button>(R.id.rad_btn_reset).setOnClickListener {
             viewModel.resetCounter()
             SharedPrefManager(mContext).saveCounter(viewModel.count)
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+    private fun showPlayStoreAlertDialog() {
+
+        val dialogView = layoutInflater.inflate(R.layout.play_store_alert_dialog, null)
+        val alertDialog = AlertDialog.Builder(mContext)
+            .setView(dialogView)
+        val dialog = alertDialog.create()
+        dialog.setCancelable(false)
+
+        dialogView.findViewById<Button>(R.id.psad_btn_cancel).setOnClickListener {
+            dialog.dismiss()
+        }
+        dialogView.findViewById<Button>(R.id.psad_btn_go).setOnClickListener {
+            viewModel.openPlayStore(mContext, "Yusuf+Mendes")
             dialog.dismiss()
         }
         dialog.show()

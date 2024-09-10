@@ -34,4 +34,4 @@ Projemi geliştirirken kullandığım yapılar ve kütüphaneler
 # Hadith List and Name of Allah List Screen
 | Hadith List Screen           | Name of Allah List Screen           |
 | ------------------------- | ------------------------- |
-| <img width="341" alt="hadith_list" src="https://github.com/user-attachments/assets/85e058f5-e90c-4cf7-95c4-d825913d46b8"> | <img width="342" alt="name_of_allah_list" src="https://github.com/user-attachments/assets/e2453b40-41f0-4ebc-8315-cfa8f42be00a"> |
+| <img width="340" alt="hadith_list" src="https://github.com/user-attachments/assets/b7d8d1f0-1a32-4a19-afa1-f70ebfdebd5f"> | <img width="342" alt="name_of_allah_list" src="https://github.com/user-attachments/assets/e2453b40-41f0-4ebc-8315-cfa8f42be00a"> |

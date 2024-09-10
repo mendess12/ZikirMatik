@@ -16,7 +16,6 @@ Projemi geliştirirken kullandığım yapılar ve kütüphaneler
 - Navigation Component
 - Firebase Firestore
 - ViewBinding
-- Parcelize
 - RecyclerView
 - ViewPagger
 - SearchView
@@ -32,19 +31,7 @@ Projemi geliştirirken kullandığım yapılar ve kütüphaneler
 | ------------------------- | ------------------------- | ------------------------- |
 | <img width="340" alt="count_list" src="https://github.com/user-attachments/assets/90438e28-9c5d-492c-a6e6-e0f508b8e1ce"> | <img width="337" alt="search" src="https://github.com/user-attachments/assets/903a4b11-d3d1-44da-a37a-50931d192bf4"> | <img width="342" alt="delete_count" src="https://github.com/user-attachments/assets/efc7066a-0f89-4177-b9fc-01850f841525"> |
 
-# Hadith List Screen
-| Hadith List Screen           |
-| ------------------------- |
-| <img width="341" alt="hadith_list" src="https://github.com/user-attachments/assets/85e058f5-e90c-4cf7-95c4-d825913d46b8"> | 
-
-# Name of Allah List Screen
-| Name of Allah List Screen           |
-| ------------------------- |
-| <img width="342" alt="name_of_allah_list" src="https://github.com/user-attachments/assets/e2453b40-41f0-4ebc-8315-cfa8f42be00a"> | 
-
-# Project Video
-
-
-
-
-
+# Hadith List and Name of Allah List Screen
+| Hadith List Screen           | Name of Allah List Screen           |
+| ------------------------- | ------------------------- |
+| <img width="341" alt="hadith_list" src="https://github.com/user-attachments/assets/85e058f5-e90c-4cf7-95c4-d825913d46b8"> | <img width="342" alt="name_of_allah_list" src="https://github.com/user-attachments/assets/e2453b40-41f0-4ebc-8315-cfa8f42be00a"> |

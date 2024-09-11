@@ -41,6 +41,6 @@ class CounterAdapter(
     fun updateCounterList(updateCounterList: List<CounterEntity>) {
         counterList.clear()
         counterList.addAll(updateCounterList)
-        notifyDataSetChanged()
+        notifyItemInserted(counterList.size)
     }
 }

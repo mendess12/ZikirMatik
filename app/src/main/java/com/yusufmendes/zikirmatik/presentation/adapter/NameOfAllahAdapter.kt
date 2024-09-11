@@ -51,6 +51,6 @@ class NameOfAllahAdapter : RecyclerView.Adapter<NameOfAllahAdapter.NameOfAllahVi
     fun updateNameOfAllahList(updateNameOfAllahList: List<NameOfAllah>) {
         nameOfAllahList.clear()
         nameOfAllahList.addAll(updateNameOfAllahList)
-        notifyDataSetChanged()
+        notifyItemInserted(nameOfAllahList.size)
     }
 }

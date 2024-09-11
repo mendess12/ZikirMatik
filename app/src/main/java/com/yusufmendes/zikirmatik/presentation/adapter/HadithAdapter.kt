@@ -36,6 +36,6 @@ class HadithAdapter : RecyclerView.Adapter<HadithAdapter.HadithViewHolder>() {
     fun updateHadithList(updateHadithList: List<Hadith>) {
         hadithList.clear()
         hadithList.addAll(updateHadithList)
-        notifyDataSetChanged()
+        notifyItemInserted(hadithList.size)
     }
 }

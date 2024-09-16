@@ -29,7 +29,7 @@ Projemi geliştirirken kullandığım yapılar ve kütüphaneler
 # Count List Screen
 | Count List Screen           | Search Count Screen      | Delete Count |
 | ------------------------- | ------------------------- | ------------------------- |
-| <img width="340" alt="count_list" src="https://github.com/user-attachments/assets/90438e28-9c5d-492c-a6e6-e0f508b8e1ce"> | <img width="337" alt="search" src="https://github.com/user-attachments/assets/903a4b11-d3d1-44da-a37a-50931d192bf4"> | <img width="342" alt="delete_count" src="https://github.com/user-attachments/assets/efc7066a-0f89-4177-b9fc-01850f841525"> |
+| <img width="338" alt="count" src="https://github.com/user-attachments/assets/cb708732-b58d-4afa-bcd3-acb41c339990"> | <img width="341" alt="search" src="https://github.com/user-attachments/assets/934aa986-efae-4919-ad52-e62079714eb0"> | <img width="343" alt="delete" src="https://github.com/user-attachments/assets/a466636e-2f1a-44d5-a178-07ba40f52876"> |
 
 # Hadith List and Name of Allah List Screen
 | Hadith List Screen           | Name of Allah List Screen           |

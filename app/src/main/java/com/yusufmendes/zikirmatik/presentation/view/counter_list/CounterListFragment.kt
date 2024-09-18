@@ -101,20 +101,12 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
     private fun search() {
         binding.searchCounter.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.isNotEmpty()) {
-                    viewModel.searchCounter(query)
-                } else {
-                    binding.tvEmptyInfo.setText(R.string.empty_count_info)
-                }
+                viewModel.searchCounter(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                if (newText.isNotEmpty()) {
-                    viewModel.searchCounter(newText)
-                } else {
-                    binding.tvEmptyInfo.setText(R.string.empty_count_info)
-                }
+                viewModel.searchCounter(newText)
                 return true
             }
         })

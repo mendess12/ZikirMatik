@@ -14,6 +14,6 @@ class CounterRepositoryImpl @Inject constructor(
     override suspend fun deleteCounter(counterEntity: CounterEntity) =
         counterDao.deleteCounter(counterEntity)
 
-    override suspend fun searchCounter(title: String): List<CounterEntity> =
+    override fun searchCounter(title: String): Flow<List<CounterEntity>> =
         counterDao.searchCounter("%$title%")
 }

@@ -29,5 +29,6 @@
     <string name="play_store_cancel">Hayır</string>
     <string name="play_store_go">Evet</string>
     <string name="empty_count_info">Zikir listeniz boş!</string>
+    <string name="search_info">Sonuç bulunamadı!</string>
 
 </resources>

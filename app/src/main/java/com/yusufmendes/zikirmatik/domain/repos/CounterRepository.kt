@@ -9,5 +9,5 @@ interface CounterRepository {
 
     suspend fun deleteCounter(counterEntity: CounterEntity)
 
-    suspend fun searchCounter(title: String): List<CounterEntity>
+    fun searchCounter(title: String): Flow<List<CounterEntity>>
 }

@@ -24,7 +24,9 @@ class CounterListFragmentViewModel @Inject constructor(
     val counterListSharedFlow: SharedFlow<List<CounterEntity>> = _counterListSharedFlow
 
     var deleteCountLiveData = MutableLiveData<Unit>()
-    var searchLiveData = MutableLiveData<List<CounterEntity>>()
+
+    private val _searchSharedFlow = MutableSharedFlow<List<CounterEntity>>()
+    val searchSharedFlow: SharedFlow<List<CounterEntity>> = _searchSharedFlow
 
     fun getCounterList() = viewModelScope.launch {
         counterListUseCase.getCounterList().collect { result ->
@@ -39,7 +41,8 @@ class CounterListFragmentViewModel @Inject constructor(
     }
 
     fun searchCounter(title: String) = viewModelScope.launch {
-        val result = searchCounterUseCase.searchCounter(title)
-        searchLiveData.postValue(result)
+        searchCounterUseCase.searchCounter(title).collect { result ->
+            _searchSharedFlow.emit(result)
+        }
     }
 }

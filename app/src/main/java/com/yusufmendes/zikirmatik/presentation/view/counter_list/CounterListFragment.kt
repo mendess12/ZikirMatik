@@ -63,13 +63,27 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
 
     private fun observeLiveData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            // Collect from StateFlow
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.counterListSharedFlow.collect { counterList ->
                     if (counterList.isNotEmpty()) {
                         counterAdapter.updateCounterList(counterList)
                         binding.tvEmptyInfo.gone()
                     } else {
+                        counterAdapter.updateCounterList(emptyList())
+                        binding.tvEmptyInfo.visible()
+                    }
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.searchSharedFlow.collect { searchList ->
+                    if (searchList.isNotEmpty()) {
+                        counterAdapter.updateCounterList(searchList)
+                        binding.tvEmptyInfo.gone()
+                    } else {
+                        counterAdapter.updateCounterList(emptyList())
+                        binding.tvEmptyInfo.setText(R.string.search_info)
                         binding.tvEmptyInfo.visible()
                     }
                 }
@@ -80,13 +94,6 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
                 view?.showSnackbar("Zikir silindi")
             } else {
                 view?.showSnackbar("Zikir listeniz boş!")
-            }
-        }
-        viewModel.searchLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                counterAdapter.updateCounterList(it)
-            } else {
-                view?.showSnackbar("Liste boş!")
             }
         }
     }

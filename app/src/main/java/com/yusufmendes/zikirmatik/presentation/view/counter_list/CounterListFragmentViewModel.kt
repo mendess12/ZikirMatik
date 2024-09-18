@@ -8,6 +8,8 @@ import com.yusufmendes.zikirmatik.domain.usecases.counterlist.DeleteCountUseCase
 import com.yusufmendes.zikirmatik.domain.usecases.counterlist.GetCounterListUseCase
 import com.yusufmendes.zikirmatik.domain.usecases.counterlist.SearchCounterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +20,16 @@ class CounterListFragmentViewModel @Inject constructor(
     private val searchCounterUseCase: SearchCounterUseCase
 ) : ViewModel() {
 
-    var counterListLiveData = MutableLiveData<List<CounterEntity>>()
+    private val _counterListSharedFlow = MutableSharedFlow<List<CounterEntity>>()
+    val counterListSharedFlow: SharedFlow<List<CounterEntity>> = _counterListSharedFlow
+
     var deleteCountLiveData = MutableLiveData<Unit>()
     var searchLiveData = MutableLiveData<List<CounterEntity>>()
 
     fun getCounterList() = viewModelScope.launch {
-        val result = counterListUseCase.getCounterList()
-        counterListLiveData.postValue(result)
+        counterListUseCase.getCounterList().collect { result ->
+            _counterListSharedFlow.emit(result)
+        }
     }
 
     fun deleteCounter(counterEntity: CounterEntity) = viewModelScope.launch {

@@ -8,13 +8,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.databinding.FragmentCounterListBinding
 import com.yusufmendes.zikirmatik.presentation.adapter.CounterAdapter
+import com.yusufmendes.zikirmatik.util.extensions.gone
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
+import com.yusufmendes.zikirmatik.util.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
@@ -40,6 +47,10 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
             rvCounter.adapter = counterAdapter
         }
 
+        binding.includeCount.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         search()
         viewModel.getCounterList()
         observeLiveData()
@@ -51,11 +62,17 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
     }
 
     private fun observeLiveData() {
-        viewModel.counterListLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                counterAdapter.updateCounterList(it)
-            } else {
-                view?.showSnackbar("Zikir listeniz boş!")
+        viewLifecycleOwner.lifecycleScope.launch {
+            // Collect from StateFlow
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.counterListSharedFlow.collect { counterList ->
+                    if (counterList.isNotEmpty()) {
+                        counterAdapter.updateCounterList(counterList)
+                        binding.tvEmptyInfo.gone()
+                    } else {
+                        binding.tvEmptyInfo.visible()
+                    }
+                }
             }
         }
         viewModel.deleteCountLiveData.observe(viewLifecycleOwner) {

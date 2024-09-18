@@ -6,12 +6,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CounterDao {
 
     @Query("SELECT * FROM counter_table")
-    suspend fun getAllCounters(): List<CounterEntity>
+    fun getAllCounters(): Flow<List<CounterEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCounter(counterEntity: CounterEntity)

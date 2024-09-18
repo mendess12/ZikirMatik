@@ -70,6 +70,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
                         binding.tvEmptyInfo.gone()
                     } else {
                         counterAdapter.updateCounterList(emptyList())
+                        binding.tvEmptyInfo.setText(R.string.empty_count_info)
                         binding.tvEmptyInfo.visible()
                     }
                 }

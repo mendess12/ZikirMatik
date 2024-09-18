@@ -19,10 +19,12 @@ class HomeFragmentViewModel @Inject constructor(
     private val playStoreUseCase: OpenPlayStoreUseCase
 ) : ViewModel() {
 
-    var addCounterLiveData = MutableLiveData<Unit>()
     var count = 0
     val countLiveData = MutableLiveData<Int>()
     val deleteCounterLiveData = MutableLiveData<Int>()
+
+    private val _addCountSharedFlow = MutableSharedFlow<Unit>()
+    val addCountSharedFlow: SharedFlow<Unit> = _addCountSharedFlow
 
     private val _playStoreSharedFlow = MutableSharedFlow<Boolean>()
     val playStoreSharedFlow: SharedFlow<Boolean> = _playStoreSharedFlow
@@ -39,7 +41,7 @@ class HomeFragmentViewModel @Inject constructor(
 
     fun addCounter(counterEntity: CounterEntity) = viewModelScope.launch {
         val result = addCounterUseCase.addCounter(counterEntity)
-        addCounterLiveData.postValue(result)
+        _addCountSharedFlow.emit(result)
     }
 
     fun openPlayStore(context: Context) = viewModelScope.launch {

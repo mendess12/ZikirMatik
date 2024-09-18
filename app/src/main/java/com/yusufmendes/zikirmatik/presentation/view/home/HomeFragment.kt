@@ -80,11 +80,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun observeLiveData() {
-        viewModel.addCounterLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                view?.showSnackbar("Zikiriniz Kaydedildi")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.addCountSharedFlow.collect {
+                    // Zikir kaydedildiğinde gösterilecek mesaj
+                    view?.showSnackbar("Zikiriniz Kaydedildi")
+                }
             }
         }
+
 
         viewModel.countLiveData.observe(viewLifecycleOwner) {
             binding.txCounterInfo.text = it.toString()

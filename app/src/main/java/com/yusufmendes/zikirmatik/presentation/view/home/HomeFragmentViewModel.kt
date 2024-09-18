@@ -8,6 +8,8 @@ import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.domain.usecases.home.AddCounterUseCase
 import com.yusufmendes.zikirmatik.domain.usecases.home.OpenPlayStoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +23,9 @@ class HomeFragmentViewModel @Inject constructor(
     var count = 0
     val countLiveData = MutableLiveData<Int>()
     val deleteCounterLiveData = MutableLiveData<Int>()
-    var playStoreLiveData = MutableLiveData<Unit>()
+
+    private val _playStoreSharedFlow = MutableSharedFlow<Boolean>()
+    val playStoreSharedFlow: SharedFlow<Boolean> = _playStoreSharedFlow
 
     fun getCounter() {
         count++
@@ -38,8 +42,9 @@ class HomeFragmentViewModel @Inject constructor(
         addCounterLiveData.postValue(result)
     }
 
-    fun openPlayStore(context: Context, developerId: String) = viewModelScope.launch {
-        val result = playStoreUseCase.openPlayStore(context, developerId)
-        playStoreLiveData.postValue(result)
+    fun openPlayStore(context: Context) = viewModelScope.launch {
+        playStoreUseCase.openPlayStore(context).collect { result ->
+            _playStoreSharedFlow.emit(result)
+        }
     }
 }

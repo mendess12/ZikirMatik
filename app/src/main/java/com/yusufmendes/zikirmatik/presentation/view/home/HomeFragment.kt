@@ -13,6 +13,9 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yusufmendes.zikirmatik.R
@@ -22,6 +25,7 @@ import com.yusufmendes.zikirmatik.databinding.FragmentHomeBinding
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
 import com.yusufmendes.zikirmatik.util.storage.SharedPrefManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -90,8 +94,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
         }
 
-        viewModel.playStoreLiveData.observe(viewLifecycleOwner){
-            view?.showSnackbar("İşleminiz başarılı, Play store açılıyor.")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.playStoreSharedFlow.collect { result ->
+                    if (result) {
+                        view?.showSnackbar("İşlem başarılı.")
+                    } else {
+                        view?.showSnackbar("İşlem başarısız.")
+                    }
+                }
+            }
         }
     }
 
@@ -197,7 +209,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             dialog.dismiss()
         }
         dialogView.findViewById<Button>(R.id.psad_btn_go).setOnClickListener {
-            viewModel.openPlayStore(mContext, "Yusuf+Mendes")
+            viewModel.openPlayStore(mContext)
             dialog.dismiss()
         }
         dialog.show()

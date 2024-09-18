@@ -2,14 +2,11 @@ package com.yusufmendes.zikirmatik.domain.repos
 
 import android.content.Context
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
+import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
 
-    suspend fun getAllCounters(): List<CounterEntity>
-
     suspend fun insertCounter(counterEntity: CounterEntity)
 
-    suspend fun deleteCounter(counterEntity: CounterEntity)
-
-    suspend fun openPlayStore(context: Context, developerId:String)
+    fun openPlayStore(context: Context): Flow<Boolean>
 }

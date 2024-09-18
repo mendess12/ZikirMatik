@@ -21,6 +21,6 @@ interface CounterDao {
     suspend fun deleteCounter(counterEntity: CounterEntity)
 
     @Query("SELECT * FROM counter_table WHERE title LIKE :title")
-    suspend fun searchCounter(title: String): List<CounterEntity>
+    fun searchCounter(title: String): Flow<List<CounterEntity>>
 
 }

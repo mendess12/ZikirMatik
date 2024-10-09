@@ -19,6 +19,7 @@
     <!-- Padding -->
     <dimen name="padding_4dp">4dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_12dp">12dp</dimen>
 
     <!-- Corner Radius -->
     <dimen name="corner_radius_8dp">8dp</dimen>

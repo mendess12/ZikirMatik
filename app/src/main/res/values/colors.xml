@@ -16,5 +16,6 @@
     <color name="view_color">#23233c</color>
     <color name="success">#6CC57C</color>
     <color name="purple">#dcdcff</color>
+    <color name="table_row_text_color">#8b8cff</color>
 
 </resources>

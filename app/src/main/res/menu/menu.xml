@@ -6,7 +6,7 @@
         android:icon="@drawable/home_image"
         android:title="@string/home" />
     <item
-        android:id="@+id/hadithFragment"
+        android:id="@+id/tableFragment"
         android:icon="@drawable/hadith_image"
         android:title="@string/hadith" />
     <item

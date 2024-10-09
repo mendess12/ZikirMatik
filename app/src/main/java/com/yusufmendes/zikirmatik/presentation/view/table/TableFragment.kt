@@ -7,7 +7,6 @@ import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.FragmentTableBinding
 import com.yusufmendes.zikirmatik.presentation.view.dua.DuaFragment
 import com.yusufmendes.zikirmatik.presentation.view.hadith.HadithFragment
-import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,11 +20,18 @@ class TableFragment : Fragment(R.layout.fragment_table) {
 
         loadChildFragment(HadithFragment())
 
+
         with(binding) {
+            hadithColumn.setBackgroundResource(R.drawable.table_background)
+
             hadithColumn.setOnClickListener {
+                hadithColumn.setBackgroundResource(R.drawable.table_background)
+                duaColumn.setBackgroundResource(R.color.screen_background)
                 loadChildFragment(HadithFragment())
             }
             duaColumn.setOnClickListener {
+                hadithColumn.setBackgroundResource(R.color.screen_background)
+                duaColumn.setBackgroundResource(R.drawable.table_background)
                 loadChildFragment(DuaFragment())
             }
         }
@@ -37,5 +43,4 @@ class TableFragment : Fragment(R.layout.fragment_table) {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
 }

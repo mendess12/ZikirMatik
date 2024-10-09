@@ -1,10 +1,11 @@
-package com.yusufmendes.zikirmatik.presentation.view
+package com.yusufmendes.zikirmatik.presentation.view.table
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.databinding.FragmentTableBinding
+import com.yusufmendes.zikirmatik.presentation.view.dua.DuaFragment
 import com.yusufmendes.zikirmatik.presentation.view.hadith.HadithFragment
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +26,7 @@ class TableFragment : Fragment(R.layout.fragment_table) {
                 loadChildFragment(HadithFragment())
             }
             duaColumn.setOnClickListener {
-                view.showSnackbar("Dua fragmentı")
+                loadChildFragment(DuaFragment())
             }
         }
     }

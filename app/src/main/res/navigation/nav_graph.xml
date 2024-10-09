@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/tableFragment"
-        android:name="com.yusufmendes.zikirmatik.presentation.view.TableFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.view.table.TableFragment"
         android:label="fragment_table"
         tools:layout="@layout/fragment_table" />
 </navigation>

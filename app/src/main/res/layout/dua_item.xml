@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/screen_background">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dua_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/counter"
+        android:text="@string/dua_title"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dua_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dua_description"
+        style="@style/hadith_content"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dua_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_4dp"
+        android:layout_marginBottom="@dimen/margin_4dp"
+        android:background="@color/button_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dua_description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

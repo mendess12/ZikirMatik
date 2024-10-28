@@ -1,6 +1,6 @@
 # Zikir Matik
 
-Zikir Matik projemde kullanıcılar zikirlerini kaydedebilir, Hadis ve Ayet okuyabilir, Allah'ın 99 ismini öğrenebilirler.
+Zikir Matik projemde kullanıcılar zikirlerini kaydedebilir, Hadis ve Ayet okuyabilir, Allah'ın 99 ismini öğrenebilir, dua ezberleyebilir, namazların kaç rekat olduğunu ve ne zaman kılanacağını öğrenebilirler.
 
 # Yapılar ve Kütüphaneler
 
@@ -17,6 +17,7 @@ Projemi geliştirirken kullandığım yapılar ve kütüphaneler
 - Navigation Component
 - Firebase Firestore
 - ViewBinding
+- Parcelize
 - Error Handling
 - RecyclerView
 - ViewPagger
@@ -37,3 +38,9 @@ Projemi geliştirirken kullandığım yapılar ve kütüphaneler
 | Hadis Listesi           | Dua Listesi            | Allah'ın İsimleri            |
 | ------------------------- | ------------------------- | ------------------------- |
 | <img width="355" alt="dua" src="https://github.com/user-attachments/assets/0a24fb30-c49e-40ac-aeb9-d17c06b7f2a3"> | <img width="349" alt="hadith" src="https://github.com/user-attachments/assets/fe8cf14b-b702-4e8e-94fa-f65081df4694"> | <img width="342" alt="name_of_allah_list" src="https://github.com/user-attachments/assets/e2453b40-41f0-4ebc-8315-cfa8f42be00a"> |
+
+# Namaz Listesi Ekranı - Namaz Detay Ekranı 
+| Namaz Listesi           | Namaz Detay         |
+| ------------------------- | ------------------------- |
+| <img width="349" alt="namaz" src="https://github.com/user-attachments/assets/3bc3147a-f966-407d-af28-494f6dc0966e"> | <img width="350" alt="namaz_detail" src="https://github.com/user-attachments/assets/cb7470f0-19c9-4c58-8dab-9526a761aadd"> |
+

@@ -64,5 +64,18 @@
         android:id="@+id/namazFragment"
         android:name="com.yusufmendes.zikirmatik.presentation.view.namaz.NamazFragment"
         android:label="fragment_namaz"
-        tools:layout="@layout/fragment_namaz" />
+        tools:layout="@layout/fragment_namaz" >
+        <action
+            android:id="@+id/action_namazFragment_to_namazDetailFragment"
+            app:destination="@id/namazDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/namazDetailFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.view.namaz_detail.NamazDetailFragment"
+        android:label="fragment_namaz_detail"
+        tools:layout="@layout/fragment_namaz_detail" >
+        <argument
+            android:name="namaz"
+            app:argType="com.yusufmendes.zikirmatik.data.model.Namaz" />
+    </fragment>
 </navigation>

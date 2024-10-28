@@ -55,4 +55,14 @@
         android:name="com.yusufmendes.zikirmatik.presentation.view.table.TableFragment"
         android:label="fragment_table"
         tools:layout="@layout/fragment_table" />
+    <fragment
+        android:id="@+id/duaFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.view.dua.DuaFragment"
+        android:label="fragment_dua"
+        tools:layout="@layout/fragment_dua" />
+    <fragment
+        android:id="@+id/namazFragment"
+        android:name="com.yusufmendes.zikirmatik.presentation.view.namaz.NamazFragment"
+        android:label="fragment_namaz"
+        tools:layout="@layout/fragment_namaz" />
 </navigation>

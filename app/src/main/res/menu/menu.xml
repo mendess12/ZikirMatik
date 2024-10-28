@@ -10,6 +10,10 @@
         android:icon="@drawable/hadith_image"
         android:title="@string/hadith" />
     <item
+        android:id="@id/namazFragment"
+        android:icon="@drawable/mosque_image"
+        android:title="@string/namaz" />
+    <item
         android:id="@id/nameOfAllahFragment"
         android:icon="@drawable/mosque_image"
         android:title="@string/name_of_allah" />

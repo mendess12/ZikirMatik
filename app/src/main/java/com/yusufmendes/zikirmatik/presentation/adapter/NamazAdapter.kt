@@ -7,7 +7,9 @@ import com.yusufmendes.zikirmatik.data.model.Namaz
 import com.yusufmendes.zikirmatik.databinding.ItemNamazBinding
 import com.yusufmendes.zikirmatik.util.extensions.downloadImage
 
-class NamazAdapter : RecyclerView.Adapter<NamazAdapter.NamazViewHolder>() {
+class NamazAdapter(
+    private val detailOnclick : (Namaz) -> Unit
+) : RecyclerView.Adapter<NamazAdapter.NamazViewHolder>() {
 
     private val namazList = ArrayList<Namaz>()
 
@@ -17,6 +19,9 @@ class NamazAdapter : RecyclerView.Adapter<NamazAdapter.NamazViewHolder>() {
             with(binding) {
                 tvItemNamazTitle.text = namaz.title
                 ivItemNamazImage.downloadImage(namaz.image_url)
+            }
+            itemView.setOnClickListener {
+                detailOnclick.invoke(namaz)
             }
         }
     }

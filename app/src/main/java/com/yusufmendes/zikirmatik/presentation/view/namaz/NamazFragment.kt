@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.yusufmendes.zikirmatik.R
+import com.yusufmendes.zikirmatik.data.model.Namaz
 import com.yusufmendes.zikirmatik.databinding.FragmentNamazBinding
 import com.yusufmendes.zikirmatik.presentation.adapter.NamazAdapter
 import com.yusufmendes.zikirmatik.util.extensions.gone
@@ -24,7 +26,7 @@ class NamazFragment : Fragment(R.layout.fragment_namaz) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNamazBinding.bind(view)
 
-        namazAdapter = NamazAdapter()
+        namazAdapter = NamazAdapter(::detailOnClick)
         with(binding) {
             rvNamaz.setHasFixedSize(true)
             rvNamaz.adapter = namazAdapter
@@ -52,5 +54,10 @@ class NamazFragment : Fragment(R.layout.fragment_namaz) {
                 }
             }
         }
+    }
+
+    private fun detailOnClick(namaz: Namaz) {
+        val action = NamazFragmentDirections.actionNamazFragmentToNamazDetailFragment(namaz)
+        findNavController().navigate(action)
     }
 }

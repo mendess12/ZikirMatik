@@ -20,6 +20,7 @@ import com.yusufmendes.zikirmatik.presentation.adapter.CounterAdapter
 import com.yusufmendes.zikirmatik.util.extensions.gone
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
 import com.yusufmendes.zikirmatik.util.extensions.visible
+import com.yusufmendes.zikirmatik.util.storage.SharedPrefManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,7 +41,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCounterListBinding.bind(view)
 
-        counterAdapter = CounterAdapter(::deleteCounter)
+        counterAdapter = CounterAdapter(::deleteCounter, ::continueCount)
         with(binding) {
             rvCounter.setHasFixedSize(true)
             rvCounter.layoutManager = LinearLayoutManager(mContext)
@@ -59,6 +60,16 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
 
     private fun deleteCounter(counterEntity: CounterEntity) {
         showAlertDialog(counterEntity)
+    }
+
+    private fun continueCount(counterEntity: CounterEntity) {
+        val action =
+            CounterListFragmentDirections.actionCounterListFragmentToHomeFragment(
+                counterEntity
+            )
+        findNavController().navigate(action)
+        SharedPrefManager(mContext).saveNavArgs(counterEntity)
+        SharedPrefManager(mContext).isNavArgs(true)
     }
 
     private fun observeLiveData() {

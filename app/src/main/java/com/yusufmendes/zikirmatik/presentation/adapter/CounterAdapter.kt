@@ -7,7 +7,8 @@ import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.databinding.ItemCounterBinding
 
 class CounterAdapter(
-    private val deleteOnClick: (CounterEntity) -> Unit
+    private val deleteOnClick: (CounterEntity) -> Unit,
+    private val countClick: (CounterEntity) -> Unit
 ) : RecyclerView.Adapter<CounterAdapter.CounterViewHolder>() {
 
     private val counterList = ArrayList<CounterEntity>()
@@ -22,6 +23,9 @@ class CounterAdapter(
                 ivBtnDelete.setOnClickListener {
                     deleteOnClick(counter)
                 }
+            }
+            itemView.setOnClickListener {
+                countClick.invoke(counter)
             }
         }
     }

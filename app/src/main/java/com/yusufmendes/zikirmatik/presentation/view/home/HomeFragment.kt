@@ -23,7 +23,9 @@ import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.databinding.BottomSheetDialogBinding
 import com.yusufmendes.zikirmatik.databinding.FragmentHomeBinding
+import com.yusufmendes.zikirmatik.util.extensions.gone
 import com.yusufmendes.zikirmatik.util.extensions.showSnackbar
+import com.yusufmendes.zikirmatik.util.extensions.visible
 import com.yusufmendes.zikirmatik.util.storage.SharedPrefManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -51,11 +53,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
         val count = navArgs.count
-        val isNavArgs = SharedPrefManager(mContext).getIsNavArgs()
 
         with(binding) {
             buttonSave.setOnClickListener {
-                if (isNavArgs) {
+                if (SharedPrefManager(mContext).getIsNavArgs()) {
                     showUpdateAlertDialog(
                         SharedPrefManager(mContext).getCounter(),
                         SharedPrefManager(mContext).getNavArgs()!!.counterId,
@@ -85,9 +86,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             buttonStar.setOnClickListener {
                 showPlayStoreAlertDialog()
             }
+            tvCountDelete.setOnClickListener {
+                SharedPrefManager(mContext).isNavArgs(false)
+                SharedPrefManager(mContext).saveCounter(0)
+                binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
+                viewModel.count = SharedPrefManager(mContext).getCounter()
+                tvCountDelete.gone()
+            }
         }
 
-        if (isNavArgs) {
+        if (SharedPrefManager(mContext).getIsNavArgs()) {
+            binding.tvCountDelete.text =
+                "${count?.title} adlı zikirinizi sonlandırmak için Buraya Tıklayınız!"
+            binding.tvCountDelete.visible()
             if (count != null) {
                 binding.txCounterInfo.text = count.counter.toString()
                 viewModel.count = count.counter!!
@@ -96,6 +107,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
                 viewModel.count = SharedPrefManager(mContext).getCounter()
             }
+        } else {
+            binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
+            viewModel.count = SharedPrefManager(mContext).getCounter()
+            binding.tvCountDelete.gone()
         }
 
         vibrateStateBackground()

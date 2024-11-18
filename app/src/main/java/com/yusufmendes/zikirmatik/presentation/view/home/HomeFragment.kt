@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
@@ -35,6 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var bottomSheetDialogBinding: BottomSheetDialogBinding
+    private val navArgs: HomeFragmentArgs by navArgs()
     private val viewModel: HomeFragmentViewModel by viewModels()
     private var vibrateCount = 0
     private lateinit var mContext: Context
@@ -48,9 +50,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
+        val count = navArgs.count
+        val isNavArgs = SharedPrefManager(mContext).getIsNavArgs()
+
         with(binding) {
             buttonSave.setOnClickListener {
-                bottomSheetDialog()
+                if (isNavArgs) {
+                    showUpdateAlertDialog(
+                        SharedPrefManager(mContext).getCounter(),
+                        SharedPrefManager(mContext).getNavArgs()!!.counterId,
+                        getCurrentDate()
+                    )
+                } else {
+                    bottomSheetDialog()
+                }
             }
             buttonGoList.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_counterListFragment)
@@ -73,8 +86,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 showPlayStoreAlertDialog()
             }
         }
-        binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
-        viewModel.count = SharedPrefManager(mContext).getCounter()
+
+        if (isNavArgs) {
+            if (count != null) {
+                binding.txCounterInfo.text = count.counter.toString()
+                viewModel.count = count.counter!!
+                SharedPrefManager(mContext).saveCounter(viewModel.count)
+            } else {
+                binding.txCounterInfo.text = SharedPrefManager(mContext).getCounter().toString()
+                viewModel.count = SharedPrefManager(mContext).getCounter()
+            }
+        }
+
         vibrateStateBackground()
         observeLiveData()
     }
@@ -83,12 +106,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.addCountSharedFlow.collect {
-                    // Zikir kaydedildiğinde gösterilecek mesaj
                     view?.showSnackbar("Zikiriniz Kaydedildi")
                 }
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.updateCountSharedFlow.collect {
+                    view?.showSnackbar("Zikriniz Güncellendi")
+                }
+            }
+        }
 
         viewModel.countLiveData.observe(viewLifecycleOwner) {
             binding.txCounterInfo.text = it.toString()
@@ -155,11 +184,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             if (counterName.isEmpty()) {
                 view?.showSnackbar("Lütfen bir isim giriniz")
             } else {
-                val calendar = Calendar.getInstance()
-                val timeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                val currentTime = timeFormat.format(calendar.time)
-                val date = currentTime
 
+                val date = getCurrentDate()
                 val userId = Settings.Secure.getString(
                     mContext.contentResolver,
                     Settings.Secure.ANDROID_ID
@@ -217,6 +243,31 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             dialog.dismiss()
         }
         dialog.show()
+    }
+
+    private fun showUpdateAlertDialog(count: Int, countId: Int, date: String) {
+        val dialogView = layoutInflater.inflate(R.layout.update_count_alert_dialog, null)
+        val alertDialog = AlertDialog.Builder(mContext)
+            .setView(dialogView)
+        val dialog = alertDialog.create()
+        dialog.setCancelable(false)
+
+        dialogView.findViewById<Button>(R.id.uad_btn_cancel).setOnClickListener {
+            dialog.dismiss()
+        }
+        dialogView.findViewById<Button>(R.id.uad_btn_update).setOnClickListener {
+            viewModel.updateCount(count, countId, date)
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+    private fun getCurrentDate(): String {
+        val calendar = Calendar.getInstance()
+        val timeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val currentTime = timeFormat.format(calendar.time)
+        val date = currentTime
+        return date
     }
 }
 

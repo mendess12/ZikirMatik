@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.domain.usecases.home.AddCounterUseCase
 import com.yusufmendes.zikirmatik.domain.usecases.home.OpenPlayStoreUseCase
+import com.yusufmendes.zikirmatik.domain.usecases.home.UpdateCountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
     private val addCounterUseCase: AddCounterUseCase,
-    private val playStoreUseCase: OpenPlayStoreUseCase
+    private val playStoreUseCase: OpenPlayStoreUseCase,
+    private val updateCountUseCase: UpdateCountUseCase
 ) : ViewModel() {
 
     var count = 0
@@ -28,6 +30,10 @@ class HomeFragmentViewModel @Inject constructor(
 
     private val _playStoreSharedFlow = MutableSharedFlow<Boolean>()
     val playStoreSharedFlow: SharedFlow<Boolean> = _playStoreSharedFlow
+
+    private val _updateCountSharedFlow = MutableSharedFlow<Unit>()
+    val updateCountSharedFlow: SharedFlow<Unit> = _updateCountSharedFlow
+
 
     fun getCounter() {
         count++
@@ -48,5 +54,10 @@ class HomeFragmentViewModel @Inject constructor(
         playStoreUseCase.openPlayStore(context).collect { result ->
             _playStoreSharedFlow.emit(result)
         }
+    }
+
+    fun updateCount(count: Int, countId: Int, date: String) = viewModelScope.launch {
+        val result = updateCountUseCase.updateCount(count, countId, date)
+        _updateCountSharedFlow.emit(result)
     }
 }

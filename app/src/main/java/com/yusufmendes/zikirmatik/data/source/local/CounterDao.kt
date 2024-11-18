@@ -23,4 +23,6 @@ interface CounterDao {
     @Query("SELECT * FROM counter_table WHERE title LIKE :title")
     fun searchCounter(title: String): Flow<List<CounterEntity>>
 
+    @Query("UPDATE counter_table SET counter = :count ,date = :date WHERE counterId = :countId")
+    suspend fun updateCount(count :Int, countId:Int,date : String )
 }

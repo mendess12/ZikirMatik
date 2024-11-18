@@ -30,4 +30,7 @@ class HomeRepositoryImpl @Inject constructor(
             emit(false)
         }
     }
+
+    override suspend fun updateCount(count: Int, countId: Int, date: String) =
+        counterDao.updateCount(count, countId, date)
 }

@@ -9,4 +9,6 @@ interface HomeRepository {
     suspend fun insertCounter(counterEntity: CounterEntity)
 
     fun openPlayStore(context: Context): Flow<Boolean>
+
+    suspend fun updateCount(count: Int, countId: Int, date: String)
 }

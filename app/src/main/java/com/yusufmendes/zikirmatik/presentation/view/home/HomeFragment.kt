@@ -164,7 +164,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 val vibrator = vibratorManager.defaultVibrator
                 vibrator.vibrate(
                     VibrationEffect.createOneShot(
-                        300,
+                        150,
                         VibrationEffect.DEFAULT_AMPLITUDE
                     )
                 )
@@ -176,13 +176,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     // For API level 26 and above
                     vibrator.vibrate(
                         VibrationEffect.createOneShot(
-                            300,
+                            150,
                             VibrationEffect.DEFAULT_AMPLITUDE
                         )
                     )
                 } else {
                     // For below API level 26
-                    vibrator.vibrate(300)
+                    vibrator.vibrate(150)
                 }
             }
         }

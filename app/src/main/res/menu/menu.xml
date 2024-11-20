@@ -11,7 +11,7 @@
         android:title="@string/hadith" />
     <item
         android:id="@id/namazFragment"
-        android:icon="@drawable/mosque_image"
+        android:icon="@drawable/prayer"
         android:title="@string/namaz" />
     <item
         android:id="@id/nameOfAllahFragment"

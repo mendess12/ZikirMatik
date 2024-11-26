@@ -8,6 +8,8 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.provider.Settings
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
@@ -96,8 +98,28 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         if (SharedPrefManager(mContext).getIsNavArgs()) {
-            binding.tvCountDelete.text =
+            // Metin
+            val fullText =
                 "${SharedPrefManager(mContext).getNavArgs()?.title} adlı zikirinizi sonlandırmak için Buraya Tıklayınız!"
+            val wordsToUnderline = listOf("Buraya Tıklayınız")
+
+            // Spannable metin oluşturma
+            val spannableString = SpannableString(fullText)
+            for (word in wordsToUnderline) {
+                val startIndex = fullText.indexOf(word)
+                if (startIndex != -1) {
+                    val endIndex = startIndex + word.length
+                    spannableString.setSpan(
+                        UnderlineSpan(),
+                        startIndex,
+                        endIndex,
+                        SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+            }
+            // TextView'e ayarla
+            binding.tvCountDelete.text = spannableString
+
             binding.tvCountDelete.visible()
             if (count != null) {
                 binding.txCounterInfo.text = count.counter.toString()

@@ -97,7 +97,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         if (SharedPrefManager(mContext).getIsNavArgs()) {
             binding.tvCountDelete.text =
-                "${count?.title} adlı zikirinizi sonlandırmak için Buraya Tıklayınız!"
+                "${SharedPrefManager(mContext).getNavArgs()?.title} adlı zikirinizi sonlandırmak için Buraya Tıklayınız!"
             binding.tvCountDelete.visible()
             if (count != null) {
                 binding.txCounterInfo.text = count.counter.toString()

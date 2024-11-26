@@ -13,6 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.yusufmendes.zikirmatik.R
 import com.yusufmendes.zikirmatik.data.model.CounterEntity
 import com.yusufmendes.zikirmatik.databinding.FragmentCounterListBinding
@@ -31,6 +37,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
     private val viewModel: CounterListFragmentViewModel by viewModels()
     private lateinit var counterAdapter: CounterAdapter
     private lateinit var mContext: Context
+    private var interstitialAd: InterstitialAd? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,6 +62,7 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
         search()
         viewModel.getCounterList()
         observeLiveData()
+        loadInterstitialAd()
 
     }
 
@@ -63,13 +71,41 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
     }
 
     private fun continueCount(counterEntity: CounterEntity) {
-        val action =
-            CounterListFragmentDirections.actionCounterListFragmentToHomeFragment(
-                counterEntity
-            )
-        findNavController().navigate(action)
-        SharedPrefManager(mContext).saveNavArgs(counterEntity)
-        SharedPrefManager(mContext).isNavArgs(true)
+        if (interstitialAd != null) {
+            interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    val action =
+                        CounterListFragmentDirections.actionCounterListFragmentToHomeFragment(
+                            counterEntity
+                        )
+                    findNavController().navigate(action) // Reklam kapatılınca zikire devam et
+                    SharedPrefManager(mContext).saveNavArgs(counterEntity)
+                    SharedPrefManager(mContext).isNavArgs(true)
+                    loadInterstitialAd() // Yeni bir reklam yükle
+                }
+
+                override fun onAdFailedToShowFullScreenContent(error: AdError) {
+                    val action =
+                        CounterListFragmentDirections.actionCounterListFragmentToHomeFragment(
+                            counterEntity
+                        )
+                    findNavController().navigate(action) // Reklam gösterilemezse de devam et
+                    SharedPrefManager(mContext).saveNavArgs(counterEntity)
+                    SharedPrefManager(mContext).isNavArgs(true)
+                }
+            }
+            interstitialAd?.show(requireActivity())
+        } else {
+            // Reklam yoksa direkt zikire devam et
+            val action =
+                CounterListFragmentDirections.actionCounterListFragmentToHomeFragment(
+                    counterEntity
+                )
+            findNavController().navigate(action)
+            SharedPrefManager(mContext).saveNavArgs(counterEntity)
+            SharedPrefManager(mContext).isNavArgs(true)
+        }
+
     }
 
     private fun observeLiveData() {
@@ -141,4 +177,20 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
         }
         dialog.show()
     }
+
+    private fun loadInterstitialAd() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(requireContext(), "ca-app-pub-5347985551957293/1418537841", adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    interstitialAd = ad
+                }
+
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    interstitialAd = null // Reklam yüklenemediyse null yap
+                }
+            })
+    }
+
+
 }

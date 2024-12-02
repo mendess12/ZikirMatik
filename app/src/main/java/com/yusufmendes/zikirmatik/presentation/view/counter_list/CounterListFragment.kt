@@ -192,5 +192,9 @@ class CounterListFragment : Fragment(R.layout.fragment_counter_list) {
             })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getCounterList()
+    }
 
 }

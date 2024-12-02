@@ -23,9 +23,9 @@ class CounterAdapter(
                 ivBtnDelete.setOnClickListener {
                     deleteOnClick(counter)
                 }
-            }
-            itemView.setOnClickListener {
-                countClick.invoke(counter)
+                ivBtnDetail.setOnClickListener {
+                    countClick.invoke(counter)
+                }
             }
         }
     }
